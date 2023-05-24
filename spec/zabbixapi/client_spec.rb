@@ -4,13 +4,13 @@ describe 'ZabbixApi::Client' do
   let(:client_mock) { ZabbixApi::Client.new(options) }
   let(:options) { {} }
   let(:auth) { double }
-  let(:api_version) { '5.2.2' }
+  let(:api_version) { '6.4' }
 
   describe '.id' do
     subject { client_mock.id }
 
     before do
-      allow_any_instance_of(ZabbixApi::Client).to receive(:api_version).and_return('5.2.2')
+      allow_any_instance_of(ZabbixApi::Client).to receive(:api_version).and_return('6.4')
       allow_any_instance_of(ZabbixApi::Client).to receive(:auth).and_return('auth')
     end
 
@@ -26,10 +26,10 @@ describe 'ZabbixApi::Client' do
     subject { client_mock }
 
     before do
-      allow_any_instance_of(ZabbixApi::Client).to receive(:auth).and_return('5.2.2')
+      allow_any_instance_of(ZabbixApi::Client).to receive(:auth).and_return('6.4')
       allow_any_instance_of(ZabbixApi::Client).to receive(:api_request).with(
         method: 'apiinfo.version', params: {}
-      ).and_return('5.2.2')
+      ).and_return('6.4')
     end
 
     it 'gets version using api_request ' do
@@ -41,7 +41,7 @@ describe 'ZabbixApi::Client' do
 
     context 'when api_version is already set' do
       before do
-        client_mock.instance_variable_set(:@api_version, '5.2.2')
+        client_mock.instance_variable_set(:@api_version, '6.4')
       end
 
       it 'does not request an api for version ' do
@@ -57,11 +57,11 @@ describe 'ZabbixApi::Client' do
     subject { client_mock }
 
     before do
-      allow_any_instance_of(ZabbixApi::Client).to receive(:api_version).and_return('5.2.2')
+      allow_any_instance_of(ZabbixApi::Client).to receive(:api_version).and_return('6.4')
       allow_any_instance_of(ZabbixApi::Client).to receive(:api_request).with(
         method: 'user.login',
         params: {
-          user: nil,
+          username: nil,
           password: nil
         }
       )
@@ -71,7 +71,7 @@ describe 'ZabbixApi::Client' do
       expect_any_instance_of(ZabbixApi::Client).to receive(:api_request).with(
         method: 'user.login',
         params: {
-          user: nil,
+          username: nil,
           password: nil
         }
       )
@@ -82,11 +82,11 @@ describe 'ZabbixApi::Client' do
   describe '.logout' do
     subject { client_mock.logout() }
     before do
-      allow_any_instance_of(ZabbixApi::Client).to receive(:api_version).and_return('5.2.2')
+      allow_any_instance_of(ZabbixApi::Client).to receive(:api_version).and_return('6.4')
       allow_any_instance_of(ZabbixApi::Client).to receive(:api_request).with(
         method: 'user.login',
         params: {
-          user: nil,
+          username: nil,
           password: nil
         }
       )
@@ -112,7 +112,7 @@ describe 'ZabbixApi::Client' do
       allow_any_instance_of(ZabbixApi::Client).to receive(:api_request).with(
         method: 'user.login',
         params: {
-          user: nil,
+          username: nil,
           password: nil
         }
       )
@@ -236,7 +236,7 @@ describe 'ZabbixApi::Client' do
     end
 
     before do
-      allow_any_instance_of(ZabbixApi::Client).to receive(:api_version).and_return('5.2.2')
+      allow_any_instance_of(ZabbixApi::Client).to receive(:api_version).and_return('6.4')
       allow_any_instance_of(ZabbixApi::Client).to receive(:auth).and_return('auth')
       allow_any_instance_of(ZabbixApi::Client).to receive(:id).and_return(id)
       allow(JSON).to receive(:generate).with(message).and_return(generated_json)
@@ -293,7 +293,7 @@ describe 'ZabbixApi::Client' do
     let(:body) { 'testbody ' }
 
     before do
-      allow_any_instance_of(ZabbixApi::Client).to receive(:api_version).and_return('5.2.2')
+      allow_any_instance_of(ZabbixApi::Client).to receive(:api_version).and_return('6.4')
       allow_any_instance_of(ZabbixApi::Client).to receive(:auth).and_return('auth')
       allow(Net::HTTP).to receive(:Proxy).with(
         'www.cerner.com',
@@ -363,7 +363,7 @@ describe 'ZabbixApi::Client' do
       end
 
       before do
-        allow_any_instance_of(ZabbixApi::Client).to receive(:api_version).and_return('5.2.2')
+        allow_any_instance_of(ZabbixApi::Client).to receive(:api_version).and_return('6.4')
         allow_any_instance_of(ZabbixApi::Client).to receive(:auth).and_return('auth')
         allow(Net::HTTP).to receive(:new).with(
           'www.cerner.com',
@@ -422,7 +422,7 @@ describe 'ZabbixApi::Client' do
     end
 
     before do
-      allow_any_instance_of(ZabbixApi::Client).to receive(:api_version).and_return('5.2.2')
+      allow_any_instance_of(ZabbixApi::Client).to receive(:api_version).and_return('6.4')
       allow_any_instance_of(ZabbixApi::Client).to receive(:auth).and_return('auth')
       allow_any_instance_of(ZabbixApi::Client).to receive(:pretty_body)
       allow_any_instance_of(ZabbixApi::Client).to receive(:http_request).with(body).and_return(response)
@@ -474,7 +474,7 @@ describe 'ZabbixApi::Client' do
     end
 
     before do
-      allow_any_instance_of(ZabbixApi::Client).to receive(:api_version).and_return('5.2.2')
+      allow_any_instance_of(ZabbixApi::Client).to receive(:api_version).and_return('6.4')
       allow_any_instance_of(ZabbixApi::Client).to receive(:auth).and_return('auth')
     end
 
@@ -518,7 +518,7 @@ describe 'ZabbixApi::Client' do
     end
 
     before do
-      allow_any_instance_of(ZabbixApi::Client).to receive(:api_version).and_return('5.2.2')
+      allow_any_instance_of(ZabbixApi::Client).to receive(:api_version).and_return('6.4')
       allow_any_instance_of(ZabbixApi::Client).to receive(:auth).and_return('auth')
       allow_any_instance_of(ZabbixApi::Client).to receive(:message_json).with(body).and_return(message_json)
       allow_any_instance_of(ZabbixApi::Client).to receive(:_request).with(message_json).and_return(result)
